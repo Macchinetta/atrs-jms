@@ -1,70 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
         http://www.springframework.org/schema/jee
         http://www.springframework.org/schema/jee/spring-jee.xsd
     ">
 
-    <import resource="classpath:/META-INF/spring/atrs-env.xml" />
+  <import resource="classpath:/META-INF/spring/atrs-env.xml" />
 
-    <!-- MyBatis設定 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" 
-            value="classpath:/META-INF/mybatis/mybatis-config.xml" />
-    </bean>
+  <!-- MyBatis設定 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="configLocation" value="classpath:/META-INF/mybatis/mybatis-config.xml" />
+  </bean>
 
-    <!-- MyBatisがマッパーを自動スキャンするパッケージを設定 -->
-    <mybatis:scan base-package="jp.co.ntt.atrs.domain.repository" />
+  <!-- MyBatisがマッパーを自動スキャンするパッケージを設定 -->
+  <mybatis:scan base-package="jp.co.ntt.atrs.domain.repository" />
 
-    <!-- ===== JMS送受信用の設定 ===== -->
-    <!-- JMS接続ファクトリ -->
-    <jee:jndi-lookup id="atrsJmsConnectionFactory" jndi-name="jms/ConnectionFactory" />
-    <bean id="cachingConnectionFactory"
-        class="org.springframework.jms.connection.CachingConnectionFactory">
-        <property name="targetConnectionFactory" ref="atrsJmsConnectionFactory" />
-        <!-- 業務発生量に応じてSessionキャッシュ数を設定 -->
-        <property name="sessionCacheSize" value="1" />
-    </bean>
+  <!-- ===== JMS送受信用の設定 ===== -->
+  <!-- JMS接続ファクトリ -->
+  <jee:jndi-lookup id="atrsJmsConnectionFactory" jndi-name="jms/ConnectionFactory" />
+  <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    <property name="targetConnectionFactory" ref="atrsJmsConnectionFactory" />
+    <!-- 業務発生量に応じてSessionキャッシュ数を設定 -->
+    <property name="sessionCacheSize" value="1" />
+  </bean>
 
-    <!-- 宛先リゾルバ -->
-    <bean id="destinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
-        <property name="resourceRef" value="true" />
-    </bean>
+  <!-- 宛先リゾルバ -->
+  <bean id="destinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
+    <property name="resourceRef" value="true" />
+  </bean>
 
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="cachingConnectionFactory" />
-        <property name="destinationResolver" ref="destinationResolver" />
-    </bean>
-    <bean id="jmsMessagingTemplate" class="org.springframework.jms.core.JmsMessagingTemplate">
-        <property name="jmsTemplate" ref="jmsTemplate" />
-    </bean>
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="cachingConnectionFactory" />
+    <property name="destinationResolver" ref="destinationResolver" />
+  </bean>
+  <bean id="jmsMessagingTemplate" class="org.springframework.jms.core.JmsMessagingTemplate">
+    <property name="jmsTemplate" ref="jmsTemplate" />
+  </bean>
 
-    <!-- ===== TransactionManager ===== -->
-    <bean id="jmsSendTransactionManager"
-        class="org.springframework.jms.connection.JmsTransactionManager">
-        <property name="connectionFactory" ref="cachingConnectionFactory" />
-    </bean>
+  <!-- ===== TransactionManager ===== -->
+  <bean id="jmsSendTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+    <property name="connectionFactory" ref="cachingConnectionFactory" />
+  </bean>
 
-    <bean id="jmsAsyncReceiveTransactionManager" 
-        class="org.springframework.jms.connection.JmsTransactionManager">
-        <property name="connectionFactory" ref="atrsJmsConnectionFactory" />
-    </bean>
+  <bean id="jmsAsyncReceiveTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+    <property name="connectionFactory" ref="atrsJmsConnectionFactory" />
+  </bean>
 
-    <bean id="jmsAsyncReceiveChainedTransactionManager"
-        class="org.springframework.data.transaction.ChainedTransactionManager"
-        primary="true">
-        <constructor-arg>
-            <list>
-                <ref bean="jmsAsyncReceiveTransactionManager" />
-                <ref bean="transactionManager" />
-            </list>
-        </constructor-arg>
-    </bean>
+  <bean id="jmsAsyncReceiveChainedTransactionManager" class="org.springframework.data.transaction.ChainedTransactionManager"
+    primary="true">
+    <constructor-arg>
+      <list>
+        <ref bean="jmsAsyncReceiveTransactionManager" />
+        <ref bean="transactionManager" />
+      </list>
+    </constructor-arg>
+  </bean>
 
 </beans>

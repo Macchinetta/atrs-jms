@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,8 +41,8 @@ public class ReservationHistoryReportListener {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(ReservationHistoryReportListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(
+            ReservationHistoryReportListener.class);
 
     /**
      * お客様番号文字数
@@ -61,7 +61,8 @@ public class ReservationHistoryReportListener {
      */
     @JmsListener(destination = "jms/queue/ReservationHistoryReportRequestQueue")
     public void receive(Message reqMsg) {
-        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(reqMsg);
+        ReservationHistoryReportCriteriaDto criteria = getCreateReportCriteria(
+                reqMsg);
         if (criteria != null) {
             createReportService.createReport(criteria);
         }
@@ -86,8 +87,8 @@ public class ReservationHistoryReportListener {
         try {
             msgBody = ((TextMessage) reqMsg).getText();
         } catch (JMSException e) {
-            throw new SystemException(LogMessages.E_AR_D1_L0004.getCode(), LogMessages.E_AR_D1_L0004
-                    .getMessage(), e);
+            throw new SystemException(LogMessages.E_AR_D1_L0004
+                    .getCode(), LogMessages.E_AR_D1_L0004.getMessage(), e);
         }
 
         return convertToDto(msgBody);

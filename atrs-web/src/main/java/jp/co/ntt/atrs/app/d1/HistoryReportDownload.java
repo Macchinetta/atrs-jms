@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,8 +64,8 @@ public class HistoryReportDownload extends AbstractFileDownloadView {
             HttpServletRequest request, HttpServletResponse response) {
 
         Path path = (Path) model.get(REPORT_FILE_PATH);
-        response.setHeader("Content-Disposition", "attachment; filename="
-                + path.getFileName());
+        response.setHeader("Content-Disposition", "attachment; filename=" + path
+                .getFileName());
 
         response.setContentType("text/csv");
     }

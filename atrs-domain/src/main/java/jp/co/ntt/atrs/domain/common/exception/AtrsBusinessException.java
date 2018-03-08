@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ public class AtrsBusinessException extends BusinessException {
      * @param args 置き換え文字列
      */
     public AtrsBusinessException(AtrsErrorCode errorCode, Object... args) {
-        super(ResultMessages.error().add(
-                ResultMessage.fromCode(errorCode.code(), args)));
+        super(ResultMessages.error().add(ResultMessage.fromCode(errorCode
+                .code(), args)));
     }
 
 }

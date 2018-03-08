@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,8 @@ public class AtrsUserDetailService implements UserDetailsService {
     /**
      * ロガー。
      */
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(AtrsUserDetailService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(
+            AtrsUserDetailService.class);
 
     /**
      * メッセージプロパティ設定。
@@ -61,7 +61,8 @@ public class AtrsUserDetailService implements UserDetailsService {
      * {@inheritDoc}
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(
+            String username) throws UsernameNotFoundException {
         Member member = memberRepository.findOneForLogin(username);
         if (member == null) {
             if (LOGGER.isInfoEnabled()) {

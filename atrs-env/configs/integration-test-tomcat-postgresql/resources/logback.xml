@@ -40,7 +40,7 @@
   <logger name="jp.co.ntt.atrs.app.common.logging.AccessLogFilter">
     <level value="info" />
   </logger>
-  
+
   <!-- Framework -->
   <logger name="org.terasoluna.gfw">
     <level value="warn" />

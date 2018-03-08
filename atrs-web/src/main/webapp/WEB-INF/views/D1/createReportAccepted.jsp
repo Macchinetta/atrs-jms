@@ -6,7 +6,6 @@
 </div>
 
 <div class="navi-forward">
-  <button type="button" name="forwardTop" class="forward" 
-    onclick="atrs.moveTo('/')">TOPへ戻る</button>
+  <button type="button" name="forwardTop" class="forward" onclick="atrs.moveTo('/')">TOPへ戻る</button>
 </div>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,15 +30,14 @@ import org.springframework.stereotype.Component;
  * @author NTT 電電太郎
  */
 @Component
-public class AtrsAuthenticationFailureBadCredentialsListener
-                                                            implements
-                                                            ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
+public class AtrsAuthenticationFailureBadCredentialsListener implements
+                                                             ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 
     /**
      * ロガー。
      */
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(AtrsAuthenticationFailureBadCredentialsListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(
+            AtrsAuthenticationFailureBadCredentialsListener.class);
 
     /**
      * {@inheritDoc}
