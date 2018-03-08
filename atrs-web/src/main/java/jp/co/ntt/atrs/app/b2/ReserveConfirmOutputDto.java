@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,8 @@ public class ReserveConfirmOutputDto {
      * 選択したフライト情報リスト を設定する。
      * @param selectFlightDtoList 選択したフライト情報リスト
      */
-    public void setSelectFlightDtoList(List<SelectFlightDto> selectFlightDtoList) {
+    public void setSelectFlightDtoList(
+            List<SelectFlightDto> selectFlightDtoList) {
         this.selectFlightDtoList = selectFlightDtoList;
     }
 

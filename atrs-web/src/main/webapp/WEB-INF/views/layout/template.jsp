@@ -2,15 +2,14 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <tilesx:useAttribute id="csslist" name="css" classname="java.util.List" />
-  <c:forEach var="item" items="${csslist}">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/${item }.css" />
-  </c:forEach>
-  <title>
-    <tiles:insertAttribute name="title" />
-  </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<tilesx:useAttribute id="csslist" name="css" classname="java.util.List" />
+<c:forEach var="item" items="${csslist}">
+  <link rel="stylesheet" type="text/css"
+    href="${pageContext.request.contextPath}/resources/css/${item }.css" />
+</c:forEach>
+<title><tiles:insertAttribute name="title" /></title>
 </head>
 
 <body>
@@ -20,8 +19,8 @@
       <%-- ここからヘッダ --%>
       <div id="header">
         <div id="header-logo">
-          <a href="#" onclick="atrs.moveTo('/')">
-            <img alt="" src="${pageContext.request.contextPath}/resources/image/logo.jpg">
+          <a href="#" onclick="atrs.moveTo('/')"> <img alt=""
+            src="${pageContext.request.contextPath}/resources/image/logo.jpg">
           </a>
         </div>
         <div id="header-content">
@@ -31,7 +30,7 @@
           <div id="header-menu">
             <tiles:insertAttribute name="header-menu" />
           </div>
-        </div> 
+        </div>
       </div>
       <%-- ヘッダここまで --%>
 
@@ -57,7 +56,7 @@
 </script>
 <tilesx:useAttribute id="jslist" name="javascript" classname="java.util.List" />
 <c:forEach var="item" items="${jslist}">
-  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/${item}.js" >
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/${item}.js">
   </script>
 </c:forEach>
 

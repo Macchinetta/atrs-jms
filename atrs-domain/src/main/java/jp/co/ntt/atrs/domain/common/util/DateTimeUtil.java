@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +50,8 @@ public class DateTimeUtil {
      * @return 引数で指定された日付および時刻を保持するDateTimeオブジェクト
      */
     public static DateTime toDateTime(Date date, String timeString) {
-        return new LocalDate(date).toDateTime(DateTimeUtil
-                .toLocalTime(timeString));
+        return new LocalDate(date).toDateTime(DateTimeUtil.toLocalTime(
+                timeString));
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,7 +119,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public void validateFlightList(List<Flight> flightList) throws BusinessException {
+    public void validateFlightList(
+            List<Flight> flightList) throws BusinessException {
 
         Assert.notEmpty(flightList);
         Assert.isTrue(flightList.size() <= 2);
@@ -156,12 +157,13 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * @throws BusinessException チェックに引っかかった場合例外
      */
     private void validateFlightDepartureDateForRoundTripFlight(
-            Flight outwardFlight, Flight homewardFlight) throws BusinessException {
+            Flight outwardFlight,
+            Flight homewardFlight) throws BusinessException {
 
         // 往路のフライトの到着時刻
         DateTime outwardArriveDateTime = DateTimeUtil.toDateTime(outwardFlight
                 .getDepartureDate(), outwardFlight.getFlightMaster()
-                .getArrivalTime());
+                        .getArrivalTime());
 
         // 復路のフライト出発時刻
         DateTime homewardDepartureDateTime = DateTimeUtil.toDateTime(
@@ -188,10 +190,10 @@ public class TicketSharedServiceImpl implements TicketSharedService {
         // 復路が往路の逆区間でない場合、業務例外をスローする。
         Route outwardRoute = outwardFlight.getFlightMaster().getRoute();
         Route homewardRoute = homewardFlight.getFlightMaster().getRoute();
-        if (!outwardRoute.getDepartureAirport().getCode().equals(
-                homewardRoute.getArrivalAirport().getCode())
-                || !outwardRoute.getArrivalAirport().getCode().equals(
-                        homewardRoute.getDepartureAirport().getCode())) {
+        if (!outwardRoute.getDepartureAirport().getCode().equals(homewardRoute
+                .getArrivalAirport().getCode()) || !outwardRoute
+                        .getArrivalAirport().getCode().equals(homewardRoute
+                                .getDepartureAirport().getCode())) {
             throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2002);
         }
     }
@@ -211,14 +213,14 @@ public class TicketSharedServiceImpl implements TicketSharedService {
                 .getFareTypeCd();
 
         // 往路の運賃種別は必ず往復運賃または特別往復運賃
-        Assert.isTrue(FareTypeCd.RT.equals(outwardFareTypeCd)
-                || FareTypeCd.SRT.equals(outwardFareTypeCd));
+        Assert.isTrue(FareTypeCd.RT.equals(outwardFareTypeCd) || FareTypeCd.SRT
+                .equals(outwardFareTypeCd));
 
         // 復路の運賃種別が往復運賃または特別往復運賃でない場合、業務例外をスローする。
-        if (!FareTypeCd.RT.equals(homewardFareTypeCd)
-                && !FareTypeCd.SRT.equals(homewardFareTypeCd)) {
-            String fareTypeName = fareTypeCodeList.asMap().get(
-                    outwardFareTypeCd.getCode());
+        if (!FareTypeCd.RT.equals(homewardFareTypeCd) && !FareTypeCd.SRT.equals(
+                homewardFareTypeCd)) {
+            String fareTypeName = fareTypeCodeList.asMap().get(outwardFareTypeCd
+                    .getCode());
             throw new AtrsBusinessException(TicketReserveErrorCode.E_AR_B2_2003, fareTypeName);
         }
     }
@@ -227,7 +229,8 @@ public class TicketSharedServiceImpl implements TicketSharedService {
      * {@inheritDoc}
      */
     @Override
-    public void validateDepatureDate(Date departureDate) throws BusinessException {
+    public void validateDepatureDate(
+            Date departureDate) throws BusinessException {
         Assert.notNull(departureDate);
 
         DateTime sysDateMidnight = dateFactory.newDateTime()
@@ -281,15 +284,16 @@ public class TicketSharedServiceImpl implements TicketSharedService {
         Assert.notNull(depDate);
 
         // 搭乗クラスの加算料金の取得
-        BoardingClass boardingClass = boardingClassProvider
-                .getBoardingClass(boardingClassCd);
+        BoardingClass boardingClass = boardingClassProvider.getBoardingClass(
+                boardingClassCd);
         int boardingClassFare = boardingClass.getExtraCharge();
 
         // 搭乗日の料金積算比率の取得
         int multiplicationRatio = getMultiplicationRatio(depDate);
 
         // 基本運賃の計算
-        int basicFare = (int) ((basicFareOfRoute + boardingClassFare) * (multiplicationRatio * 0.01));
+        int basicFare = (int) ((basicFareOfRoute + boardingClassFare)
+                * (multiplicationRatio * 0.01));
 
         return basicFare;
     }

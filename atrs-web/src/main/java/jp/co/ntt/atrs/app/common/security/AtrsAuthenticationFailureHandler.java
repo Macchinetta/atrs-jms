@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,14 +34,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AtrsAuthenticationFailureHandler extends
-                                             SimpleUrlAuthenticationFailureHandler {
+                                              SimpleUrlAuthenticationFailureHandler {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
-            HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+            HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
 
         // AuthenticationServiceExceptionの場合はシステム例外とする
         if (exception instanceof AuthenticationServiceException) {

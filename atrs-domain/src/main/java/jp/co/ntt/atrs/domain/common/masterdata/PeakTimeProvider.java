@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,8 +67,10 @@ public class PeakTimeProvider {
 
         for (PeakTime peakTime : peakTimeList) {
             Interval peakTimeInterval = new Interval(new DateTime(peakTime
-                    .getPeakStartDate()).withTimeAtStartOfDay(), new DateTime(peakTime
-                    .getPeakEndDate()).withTimeAtStartOfDay().plus(1));
+                    .getPeakStartDate())
+                            .withTimeAtStartOfDay(), new DateTime(peakTime
+                                    .getPeakEndDate()).withTimeAtStartOfDay()
+                                            .plus(1));
             // 搭乗日が該当するピーク時期積算比率を返却します
             if (peakTimeInterval.contains(depDate.getTime())) {
                 return peakTime;

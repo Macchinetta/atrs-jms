@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -164,8 +164,8 @@ public class ReservationHistoryDto implements Serializable {
     public String toCsvLineString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"",
-                reserveNo, dateFormat.format(reserveDate), totalFare,
-                dateFormat.format(departureDate), reserveFlightNo, flightName);
+                reserveNo, dateFormat.format(reserveDate), totalFare, dateFormat
+                        .format(departureDate), reserveFlightNo, flightName);
     }
 
 }

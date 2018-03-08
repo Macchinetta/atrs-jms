@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,7 +151,8 @@ public class FlightSearchFormOutputDto implements Serializable {
      * デフォルト搭乗クラスコードを設定する。
      * @param defaultBoardingClassCd
      */
-    public void setDefaultBoardingClassCd(BoardingClassCd defaultBoardingClassCd) {
+    public void setDefaultBoardingClassCd(
+            BoardingClassCd defaultBoardingClassCd) {
         this.defaultBoardingClassCd = defaultBoardingClassCd;
     }
 

@@ -2,10 +2,11 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" />
-  <title>Airline Ticket Reservation System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" type="text/css"
+  href="${pageContext.request.contextPath}/resources/css/style.css" />
+<title>Airline Ticket Reservation System</title>
 </head>
 
 <body>
@@ -13,7 +14,7 @@
     <div id="main">
 
       <%-- ここからヘッダ --%>
-      <%@ include file="error-header.jsp" %>
+      <%@ include file="error-header.jsp"%>
       <%-- ヘッダここまで --%>
 
       <%-- ここからメイン --%>
@@ -36,7 +37,7 @@
 
       <%-- フッタここから --%>
       <div id="footer">
-        <%@ include file="../../A0/footer.jsp" %>
+        <%@ include file="../../A0/footer.jsp"%>
       </div>
       <%-- フッタここまで --%>
 
@@ -49,7 +50,7 @@
   if (!atrs) var atrs = {};
   atrs.baseUrl = "${f:js(pageContext.request.contextPath)}";
 </script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common.js" >
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common.js">
 </script>
 
 </html>

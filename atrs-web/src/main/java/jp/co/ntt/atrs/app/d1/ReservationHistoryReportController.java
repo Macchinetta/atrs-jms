@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2017 NTT Corporation.
+ * Copyright 2014-2018 NTT Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,8 @@ public class ReservationHistoryReportController {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(ReservationHistoryReportController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(
+            ReservationHistoryReportController.class);
 
     /**
      * レポートパス名の属性名
@@ -65,7 +65,8 @@ public class ReservationHistoryReportController {
      * 履歴レポート作成条件入力画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = { "HistoryReport/create" }, method = RequestMethod.GET, params = "form")
+    @RequestMapping(value = {
+            "HistoryReport/create" }, method = RequestMethod.GET, params = "form")
     @TransactionTokenCheck(type = TransactionTokenType.BEGIN)
     public String createReportForm() {
         return "D1/createReportForm";
@@ -76,7 +77,8 @@ public class ReservationHistoryReportController {
      * @param userDetails ログインユーザ情報
      * @return リダイレクト先のURL
      */
-    @RequestMapping(value = { "HistoryReport/create" }, method = RequestMethod.POST)
+    @RequestMapping(value = {
+            "HistoryReport/create" }, method = RequestMethod.POST)
     @TransactionTokenCheck
     public String create(@AuthenticationPrincipal AtrsUserDetails userDetails) {
         historyReportCreationService.sendRequest(userDetails.getMember()
@@ -88,7 +90,8 @@ public class ReservationHistoryReportController {
      * 履歴レポート作成要求受付完了画面を表示する。
      * @return View論理名
      */
-    @RequestMapping(value = { "HistoryReport/create" }, method = RequestMethod.GET, params = "accepted")
+    @RequestMapping(value = {
+            "HistoryReport/create" }, method = RequestMethod.GET, params = "accepted")
     public String accepted() {
         return "D1/createReportAccepted";
     }
@@ -99,7 +102,8 @@ public class ReservationHistoryReportController {
      * @param model 出力情報を保持するオブジェクト
      * @return View論理名
      */
-    @RequestMapping(value = { "HistoryReport/download" }, method = RequestMethod.GET, params = "reportList")
+    @RequestMapping(value = {
+            "HistoryReport/download" }, method = RequestMethod.GET, params = "reportList")
     public String dispReportList(
             @AuthenticationPrincipal AtrsUserDetails userDetails, Model model) {
 
@@ -122,9 +126,9 @@ public class ReservationHistoryReportController {
      * @param model 出力情報を保持するオブジェクト
      * @return ダウンロードView
      */
-    @RequestMapping(value = { "HistoryReport/download" }, method = RequestMethod.GET)
-    public String download(
-            @AuthenticationPrincipal AtrsUserDetails userDetails,
+    @RequestMapping(value = {
+            "HistoryReport/download" }, method = RequestMethod.GET)
+    public String download(@AuthenticationPrincipal AtrsUserDetails userDetails,
             @RequestParam("reportName") String reportName, Model model) {
 
         // DL対象のレポートパス名の取得
